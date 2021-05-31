@@ -1,24 +1,31 @@
 <?php
-function get_curl($url){
-    $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, $url);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    $result = curl_exec($curl);
-    curl_close($curl);
 
-    return json_decode($result, true);
-}
+    $apikey = 'AIzaSyBbuY-ppNRH5i9oXuNSUbnDRD_2FiALdEA'; 
+    $id = 'UCrDpcBofGGMLsAmxtjZBHlQ';
+    $googleApiUrl = 'https://www.googleapis.com/youtube/v3/channels?part=snippet,contentDetails,statistics&id=' . $id . '&key=' . $apikey;
 
-$result = get_curl('https://www.googleapis.com/youtube/v3/channels?part=snippet,contentDetails,statistics&id=UCrDpcBofGGMLsAmxtjZBHlQ&key=AIzaSyB5CexAxWjzUn8c0g-iQheIRkKB6zreFjQ');
+    $ch = curl_init();
 
-$id = $result['items'][0]['id'];
-$nama= $result['items'][0]['snippet']['title'];
-$fotoProfil = $result['items'][0]['snippet']['thumbnails']['medium']['url'];
-$deskripsi = $result['items'][0]['snippet']['description'];
-$tanggalPembuatan = $result['items'][0]['snippet']['publishedAt'];
-$jumlahView = $result['items'][0]['statistics']['viewCount'];
-$jumlahSubscriber = $result['items'][0]['statistics']['subscriberCount'];
-$jumlahVideo = $result['items'][0]['statistics']['videoCount'];
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_URL, $googleApiUrl);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+    curl_setopt($ch, CURLOPT_VERBOSE, 0);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    $response = curl_exec($ch);
+
+    curl_close($ch);
+    $data = json_decode($response);
+    $value = json_decode(json_encode($data), true);
+    
+    $id = $value['items'][0]['id'];
+    $nama= $value['items'][0]['snippet']['title'];
+    $fotoProfil = $value['items'][0]['snippet']['thumbnails']['medium']['url'];
+    $deskripsi = $value['items'][0]['snippet']['description'];
+    $tanggalPembuatan = $value['items'][0]['snippet']['publishedAt'];
+    $jumlahView = $value['items'][0]['statistics']['viewCount'];
+    $jumlahSubscriber = $value['items'][0]['statistics']['subscriberCount'];
+    $jumlahVideo = $value['items'][0]['statistics']['videoCount'];
 ?>
 
 <!DOCTYPE html>
