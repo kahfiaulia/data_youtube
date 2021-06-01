@@ -98,7 +98,8 @@
             $judulVideo = $value['items'][$i]['snippet']['title'];
             $tanggalUploadVideo = $value['items'][$i]['snippet']['publishedAt'];
             // $jumlahViewVideo = $value['items'][0]['statistics']['viewCount'];
-            echo '<a href="">'.$judulVideo."</a><br>";
+            echo $i+1;
+            echo '<a href="">'.$judulVideo."</a>";
             echo $tanggalUploadVideo."<br>";
             // echo $jumlahViewVideo."<br><br>";
             $i+=1;
