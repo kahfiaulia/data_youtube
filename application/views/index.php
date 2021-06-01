@@ -1,23 +1,24 @@
 <?php
+    function get_curl($url){
+        $ch = curl_init();
 
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch, CURLOPT_VERBOSE, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        $value = curl_exec($ch);
+        curl_close($ch);
+
+        return json_decode($value, true);
+    }
+    
     $apikey = 'AIzaSyBbuY-ppNRH5i9oXuNSUbnDRD_2FiALdEA'; 
     $id = 'UCrDpcBofGGMLsAmxtjZBHlQ';
-    $googleApiUrl = 'https://www.googleapis.com/youtube/v3/channels?part=snippet,contentDetails,statistics&id=' . $id . '&key=' . $apikey;
 
-    $ch = curl_init();
-
-    curl_setopt($ch, CURLOPT_HEADER, 0);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_URL, $googleApiUrl);
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-    curl_setopt($ch, CURLOPT_VERBOSE, 0);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-    $response = curl_exec($ch);
-
-    curl_close($ch);
-    $data = json_decode($response);
-    $value = json_decode(json_encode($data), true);
-    
+    #Ambil data channel berdasarkan id channel
+    $value = get_curl('https://www.googleapis.com/youtube/v3/channels?part=snippet,contentDetails,statistics&id=' . $id . '&key=' . $apikey);
     $id = $value['items'][0]['id'];
     $nama= $value['items'][0]['snippet']['title'];
     $fotoProfil = $value['items'][0]['snippet']['thumbnails']['medium']['url'];
@@ -26,6 +27,16 @@
     $jumlahView = $value['items'][0]['statistics']['viewCount'];
     $jumlahSubscriber = $value['items'][0]['statistics']['subscriberCount'];
     $jumlahVideo = $value['items'][0]['statistics']['videoCount'];
+
+    #Ambil data video dari playlist channel
+    $idUpload = $value['items'][0]['contentDetails']['relatedPlaylists']['uploads'];
+    $urlGetVideo = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&playlistId=' . $idUpload . '&key=' . $apikey . '&maxResults=50';
+    $value = get_curl($urlGetVideo);
+
+    // #Ambil data detail video dari playlist channel
+    // $idVideo = $value['items'][0]['contentDetails']['videoId'];
+    // $urlGetVideoDetail = 'https://www.googleapis.com/youtube/v3/videos?part=statistics&id=' . $idVideo . '&key=' . $apikey;
+    // $value = get_curl($urlGetVideoDetail);
 ?>
 
 <!DOCTYPE html>
@@ -80,5 +91,18 @@
         <tr>
     </tbody>
     </table>
+    <br>
+    <?php
+        $i = 0;
+        while($i <= 49) {
+            $judulVideo = $value['items'][$i]['snippet']['title'];
+            $tanggalUploadVideo = $value['items'][$i]['snippet']['publishedAt'];
+            // $jumlahViewVideo = $value['items'][0]['statistics']['viewCount'];
+            echo '<a href="">'.$judulVideo."</a><br>";
+            echo $tanggalUploadVideo."<br>";
+            // echo $jumlahViewVideo."<br><br>";
+            $i+=1;
+        }
+    ?>
 </body>
 </html>
