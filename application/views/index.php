@@ -13,6 +13,21 @@
 
         return json_decode($value, true);
     }
+
+    // function get_video_detail($url){
+    //     $ch = curl_init();
+
+    //     curl_setopt($ch, CURLOPT_HEADER, 0);
+    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    //     curl_setopt($ch, CURLOPT_URL, $url);
+    //     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+    //     curl_setopt($ch, CURLOPT_VERBOSE, 0);
+    //     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    //     $valueVideoDetail = curl_exec($ch);
+    //     curl_close($ch);
+
+    //     return json_decode($valueVideoDetail, true);
+    // }
     
     $apikey = 'AIzaSyBbuY-ppNRH5i9oXuNSUbnDRD_2FiALdEA'; 
     $id = 'UCrDpcBofGGMLsAmxtjZBHlQ';
@@ -31,12 +46,15 @@
     #Ambil data video dari playlist channel
     $idUpload = $value['items'][0]['contentDetails']['relatedPlaylists']['uploads'];
     $urlGetVideo = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&playlistId=' . $idUpload . '&key=' . $apikey . '&maxResults=50';
+    // $urlGetVideoNextPage = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&playlistId=' . $idUpload . '&key=' . $apikey . '&maxResults=50$nextTokenPage='. $nextTokenPage;
     $value = get_curl($urlGetVideo);
 
-    // #Ambil data detail video dari playlist channel
-    // $idVideo = $value['items'][0]['contentDetails']['videoId'];
-    // $urlGetVideoDetail = 'https://www.googleapis.com/youtube/v3/videos?part=statistics&id=' . $idVideo . '&key=' . $apikey;
-    // $value = get_curl($urlGetVideoDetail);
+    function get_video_detail($videoId){
+        #Ambil data detail video dari playlist channel
+        $idVideo = $value['items'][$i]['contentDetails']['videoId'];
+        $urlGetVideoDetail = 'https://www.googleapis.com/youtube/v3/videos?part=statistics&id=' . $idVideo . '&key=' . $apikey;
+        $valueVideoDetail = get_video_detail($urlGetVideoDetail);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -93,17 +111,23 @@
     </table>
     <br>
     <?php
+        // $nextPageToken = $value['nextPageToken'];
         $i = 0;
         while($i <= 49) {
+            $idVideo = $value['items'][$i]['snippet']['resourceId']['videoId'];
+            $thumbnailVideo = $value['items'][$i]['snippet']['thumbnails']['default']['url'];
             $judulVideo = $value['items'][$i]['snippet']['title'];
             $tanggalUploadVideo = $value['items'][$i]['snippet']['publishedAt'];
-            // $jumlahViewVideo = $value['items'][0]['statistics']['viewCount'];
+            // $jumlahViewVideo = $valueVideoDetail['items'][0]['statistics']['viewCount'];
             echo $i+1;
-            echo '<a href="">'.$judulVideo."</a>";
+            echo '<a href="?tes">'.$idVideo."</a>";
+            echo $judulVideo."<br>";
+            echo '<img src='. $thumbnailVideo .' alt=""><br>';
             echo $tanggalUploadVideo."<br>";
             // echo $jumlahViewVideo."<br><br>";
             $i+=1;
         }
     ?>
+    <a href="">Next</a>
 </body>
 </html>
