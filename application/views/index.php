@@ -13,21 +13,6 @@
 
         return json_decode($value, true);
     }
-
-    // function get_video_detail($url){
-    //     $ch = curl_init();
-
-    //     curl_setopt($ch, CURLOPT_HEADER, 0);
-    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    //     curl_setopt($ch, CURLOPT_URL, $url);
-    //     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-    //     curl_setopt($ch, CURLOPT_VERBOSE, 0);
-    //     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-    //     $valueVideoDetail = curl_exec($ch);
-    //     curl_close($ch);
-
-    //     return json_decode($valueVideoDetail, true);
-    // }
     
     $apikey = 'AIzaSyBbuY-ppNRH5i9oXuNSUbnDRD_2FiALdEA'; 
     $id = 'UCrDpcBofGGMLsAmxtjZBHlQ';
@@ -48,12 +33,23 @@
     $urlGetVideo = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&playlistId=' . $idUpload . '&key=' . $apikey . '&maxResults=50';
     // $urlGetVideoNextPage = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&playlistId=' . $idUpload . '&key=' . $apikey . '&maxResults=50$nextTokenPage='. $nextTokenPage;
     $value = get_curl($urlGetVideo);
-
-    function get_video_detail($videoId){
+    
+    function get_video_detail($idVideo){
         #Ambil data detail video dari playlist channel
-        $idVideo = $value['items'][$i]['contentDetails']['videoId'];
+        $apikey = 'AIzaSyBbuY-ppNRH5i9oXuNSUbnDRD_2FiALdEA'; 
         $urlGetVideoDetail = 'https://www.googleapis.com/youtube/v3/videos?part=statistics&id=' . $idVideo . '&key=' . $apikey;
-        $valueVideoDetail = get_video_detail($urlGetVideoDetail);
+        $value = get_curl($urlGetVideoDetail);
+
+        $jumlahViewVideo = $value['items'][0]['statistics']['viewCount'];
+        $jumlahLikeVideo = $value['items'][0]['statistics']['likeCount'];
+        $jumlahDislikeVideo = $value['items'][0]['statistics']['dislikeCount'];
+        $jumlahFavoritVideo = $value['items'][0]['statistics']['favoriteCount'];
+        $jumlahCommentVideo = $value['items'][0]['statistics']['commentCount'];
+        echo 'Jumlah View: '.$jumlahViewVideo.'<br>';
+        echo 'Jumlah Like: '.$jumlahLikeVideo.'<br>';
+        echo 'Jumlah Dislike: '.$jumlahDislikeVideo.'<br>';
+        echo 'Jumlah Favorit: '.$jumlahFavoritVideo.'<br>';
+        echo 'Jumlah Komentar: '.$jumlahCommentVideo.'<br>';
     }
 ?>
 
@@ -109,24 +105,25 @@
         <tr>
     </tbody>
     </table>
-    <br>
     <?php
         // $nextPageToken = $value['nextPageToken'];
         $i = 0;
+        $idVideo = array();
         while($i <= 49) {
             $idVideo = $value['items'][$i]['snippet']['resourceId']['videoId'];
             $thumbnailVideo = $value['items'][$i]['snippet']['thumbnails']['default']['url'];
             $judulVideo = $value['items'][$i]['snippet']['title'];
             $tanggalUploadVideo = $value['items'][$i]['snippet']['publishedAt'];
-            // $jumlahViewVideo = $valueVideoDetail['items'][0]['statistics']['viewCount'];
+            echo '<br>';
             echo $i+1;
-            echo '<a href="?tes">'.$idVideo."</a>";
+            echo '<a href="?get_video_detail='.$idVideo.'" id="idVideo">'.$idVideo."</a>";
             echo $judulVideo."<br>";
             echo '<img src='. $thumbnailVideo .' alt=""><br>';
             echo $tanggalUploadVideo."<br>";
-            // echo $jumlahViewVideo."<br><br>";
+            get_video_detail($idVideo);
             $i+=1;
         }
+        
     ?>
     <a href="">Next</a>
 </body>
