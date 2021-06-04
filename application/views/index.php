@@ -125,7 +125,7 @@ $id = 'UCrDpcBofGGMLsAmxtjZBHlQ';
             echo '<a href="?get_video_detail='.$idVideo.'" id="idVideo">'.$idVideo."</a>";
             echo $judulVideo."<br>";
             echo '<img src='. $thumbnailVideo .' alt=""><br>';
-            echo date('Y-m-d  h:i:sa', strtotime($tanggalUploadVideo)) . "<br>"
+            echo date('Y-m-d  h:i:sa', strtotime($tanggalUploadVideo)) . "<br>";
             get_video_detail($idVideo);
             $i+=1;
         }
