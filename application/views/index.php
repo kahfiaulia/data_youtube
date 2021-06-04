@@ -30,21 +30,24 @@
 
     #Ambil data video dari playlist channel
     $idUpload = $value['items'][0]['contentDetails']['relatedPlaylists']['uploads'];
-    $urlGetVideo = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&playlistId=' . $idUpload . '&key=' . $apikey . '&maxResults=50';
-    // $urlGetVideoNextPage = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&playlistId=' . $idUpload . '&key=' . $apikey . '&maxResults=50$nextTokenPage='. $nextTokenPage;
-    $value = get_curl($urlGetVideo);
     
+    $pageToken = '';
+    $urlGetVideo = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&playlistId=' . $idUpload . '&key=' . $apikey . '&maxResults=50&pageToken='. $pageToken;
+    $value = get_curl($urlGetVideo);
+
     function get_video_detail($idVideo){
         #Ambil data detail video dari playlist channel
         $apikey = 'AIzaSyBbuY-ppNRH5i9oXuNSUbnDRD_2FiALdEA'; 
-        $urlGetVideoDetail = 'https://www.googleapis.com/youtube/v3/videos?part=statistics&id=' . $idVideo . '&key=' . $apikey;
+        $urlGetVideoDetail = 'https://www.googleapis.com/youtube/v3/videos?part=statistics,contentDetails&id=' . $idVideo . '&key=' . $apikey;
         $value = get_curl($urlGetVideoDetail);
 
+        $durasiVideo = $value['items'][0]['contentDetails']['duration'];
         $jumlahViewVideo = $value['items'][0]['statistics']['viewCount'];
         $jumlahLikeVideo = $value['items'][0]['statistics']['likeCount'];
         $jumlahDislikeVideo = $value['items'][0]['statistics']['dislikeCount'];
         $jumlahFavoritVideo = $value['items'][0]['statistics']['favoriteCount'];
         $jumlahCommentVideo = $value['items'][0]['statistics']['commentCount'];
+        echo 'Durasi: '.$durasiVideo.'<br>';
         echo 'Jumlah View: '.$jumlahViewVideo.'<br>';
         echo 'Jumlah Like: '.$jumlahLikeVideo.'<br>';
         echo 'Jumlah Dislike: '.$jumlahDislikeVideo.'<br>';
@@ -106,10 +109,10 @@
     </tbody>
     </table>
     <?php
-        // $nextPageToken = $value['nextPageToken'];
         $i = 0;
         $idVideo = array();
         while($i <= 49) {
+            $pageToken = $value['nextPageToken'];
             $idVideo = $value['items'][$i]['snippet']['resourceId']['videoId'];
             $thumbnailVideo = $value['items'][$i]['snippet']['thumbnails']['default']['url'];
             $judulVideo = $value['items'][$i]['snippet']['title'];
