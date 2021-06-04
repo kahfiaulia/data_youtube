@@ -18,6 +18,16 @@ function get_curl($url)
 $apikey = 'AIzaSyBbuY-ppNRH5i9oXuNSUbnDRD_2FiALdEA';
 $id = 'UCrDpcBofGGMLsAmxtjZBHlQ';
 
+	#Ambil data channel berdasarkan id channel
+    $value = get_curl('https://www.googleapis.com/youtube/v3/channels?part=snippet,contentDetails,statistics&id=' . $id . '&key=' . $apikey);
+    $id = $value['items'][0]['id'];
+    $nama= $value['items'][0]['snippet']['title'];
+    $fotoProfil = $value['items'][0]['snippet']['thumbnails']['medium']['url'];
+    $deskripsi = $value['items'][0]['snippet']['description'];
+    $tanggalPembuatan = $value['items'][0]['snippet']['publishedAt'];
+    $jumlahView = $value['items'][0]['statistics']['viewCount'];
+    $jumlahSubscriber = $value['items'][0]['statistics']['subscriberCount'];
+    $jumlahVideo = $value['items'][0]['statistics']['videoCount'];
     #Ambil data video dari playlist channel
     $idUpload = $value['items'][0]['contentDetails']['relatedPlaylists']['uploads'];
     
