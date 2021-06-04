@@ -1,23 +1,24 @@
 <?php
-    function get_curl($url){
-        $ch = curl_init();
+function get_curl($url)
+{
+    $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-        curl_setopt($ch, CURLOPT_VERBOSE, 0);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        $value = curl_exec($ch);
-        curl_close($ch);
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+    curl_setopt($ch, CURLOPT_VERBOSE, 0);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    $value = curl_exec($ch);
+    curl_close($ch);
 
-        return json_decode($value, true);
-    }
-    
-    $apikey = 'AIzaSyBbuY-ppNRH5i9oXuNSUbnDRD_2FiALdEA'; 
-    $id = 'UCrDpcBofGGMLsAmxtjZBHlQ';
+    return json_decode($value, true);
+}
 
-    #Ambil data channel berdasarkan id channel
+$apikey = 'AIzaSyBbuY-ppNRH5i9oXuNSUbnDRD_2FiALdEA';
+$id = 'UCrDpcBofGGMLsAmxtjZBHlQ';
+
+	#Ambil data channel berdasarkan id channel
     $value = get_curl('https://www.googleapis.com/youtube/v3/channels?part=snippet,contentDetails,statistics&id=' . $id . '&key=' . $apikey);
     $id = $value['items'][0]['id'];
     $nama= $value['items'][0]['snippet']['title'];
@@ -27,7 +28,6 @@
     $jumlahView = $value['items'][0]['statistics']['viewCount'];
     $jumlahSubscriber = $value['items'][0]['statistics']['subscriberCount'];
     $jumlahVideo = $value['items'][0]['statistics']['videoCount'];
-
     #Ambil data video dari playlist channel
     $idUpload = $value['items'][0]['contentDetails']['relatedPlaylists']['uploads'];
     
@@ -58,57 +58,60 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Channel YouTube</title>
 </head>
+
 <body>
     <table class="table table-bordered">
-    <tbody>
-        <tr>
-        <th scope="row">ID Channel</th>
-        <td><?php echo $id;?></td>
-        </tr>
-        <tr>
-        <th scope="row">Nama Channel</th>
-        <td><?php echo $nama;?></td>
-        </tr>
-        <tr>
-        <tr>
-        <th scope="row">Foto Profil Channel</th>
-        <td><img src="<?php echo $fotoProfil;?>" alt=""></td>
-        </tr>
-        <tr>
-        <tr>
-        <th scope="row">Deskripsi Channel</th>
-        <td><?php echo $deskripsi;?></td>
-        </tr>
-        <tr>
-        <tr>
-        <th scope="row">Tanggal Pembuatan Channel</th>
-        <td><?php echo $tanggalPembuatan;?></td>
-        </tr>
-        <tr>
-        <tr>
-        <th scope="row">Jumlah View Channel</th>
-        <td><?php echo $jumlahView;?></td>
-        </tr>
-        <tr>
-        <tr>
-        <th scope="row">Jumlah Subscriber Channel</th>
-        <td><?php echo $jumlahSubscriber;?></td>
-        </tr>
-        <tr>
-        <tr>
-        <th scope="row">Jumlah Video</th>
-        <td><?php echo $jumlahVideo;?></td>
-        </tr>
-        <tr>
-    </tbody>
+        <tbody>
+            <tr>
+                <th scope="row">ID Channel</th>
+                <td><?php echo $id; ?></td>
+            </tr>
+            <tr>
+                <th scope="row">Nama Channel</th>
+                <td><?php echo $nama; ?></td>
+            </tr>
+            <tr>
+            <tr>
+                <th scope="row">Foto Profil Channel</th>
+                <td><img src="<?php echo $fotoProfil; ?>" alt=""></td>
+            </tr>
+            <tr>
+            <tr>
+                <th scope="row">Deskripsi Channel</th>
+                <td><?php echo $deskripsi; ?></td>
+            </tr>
+            <tr>
+            <tr>
+                <th scope="row">Tanggal Pembuatan Channel</th>
+                <td><?php echo date('Y-m-d  h:i:sa', strtotime($tanggalPembuatan)); ?></td>
+            </tr>
+            <tr>
+            <tr>
+                <th scope="row">Jumlah View Channel</th>
+                <td><?php echo $jumlahView; ?></td>
+            </tr>
+            <tr>
+            <tr>
+                <th scope="row">Jumlah Subscriber Channel</th>
+                <td><?php echo $jumlahSubscriber; ?></td>
+            </tr>
+            <tr>
+            <tr>
+                <th scope="row">Jumlah Video</th>
+                <td><?php echo $jumlahVideo; ?></td>
+            </tr>
+            <tr>
+        </tbody>
     </table>
     <?php
+
         $i = 0;
         $idVideo = array();
         while($i <= 49) {
@@ -122,7 +125,7 @@
             echo '<a href="?get_video_detail='.$idVideo.'" id="idVideo">'.$idVideo."</a>";
             echo $judulVideo."<br>";
             echo '<img src='. $thumbnailVideo .' alt=""><br>';
-            echo $tanggalUploadVideo."<br>";
+            echo date('Y-m-d  h:i:sa', strtotime($tanggalUploadVideo)) . "<br>"
             get_video_detail($idVideo);
             $i+=1;
         }
@@ -130,4 +133,5 @@
     ?>
     <a href="">Next</a>
 </body>
+
 </html>
