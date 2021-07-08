@@ -32,7 +32,8 @@ $id = 'UCrDpcBofGGMLsAmxtjZBHlQ';
     $idUpload = $value['items'][0]['contentDetails']['relatedPlaylists']['uploads'];
     
     $pageToken = '';
-    $urlGetVideo = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&playlistId=' . $idUpload . '&key=' . $apikey . '&maxResults=50&pageToken='. $pageToken;
+    $maxResult = 50;
+    $urlGetVideo = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&playlistId=' . $idUpload . '&key=' . $apikey . '&maxResults='. $maxResult. '&pageToken='. $pageToken;
     $value = get_curl($urlGetVideo);
 
     function get_video_detail($idVideo){
