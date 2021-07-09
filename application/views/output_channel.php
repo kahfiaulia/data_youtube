@@ -18,8 +18,6 @@ function get_curl($url)
 
 $apikey = 'AIzaSyBbuY-ppNRH5i9oXuNSUbnDRD_2FiALdEA';
 // UCrDpcBofGGMLsAmxtjZBHlQ
-$id = $data['id'];
-
 	#Ambil data channel berdasarkan id channel
     $value = get_curl('https://www.googleapis.com/youtube/v3/channels?part=snippet,contentDetails,statistics&id=' . $id . '&key=' . $apikey);
     $id = $value['items'][0]['id'];
@@ -34,7 +32,6 @@ $id = $data['id'];
     $idUpload = $value['items'][0]['contentDetails']['relatedPlaylists']['uploads'];
     
     $pageToken = '';
-    $maxResults = $data['maxResults'];
     $urlGetVideo = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&playlistId=' . $idUpload . '&key=' . $apikey . '&maxResults='. $maxResults. '&pageToken='. $pageToken;
     $value = get_curl($urlGetVideo);
 
@@ -117,7 +114,7 @@ $id = $data['id'];
 
         $i = 0;
         $idVideo = array();
-        while($i <= 49) {
+        while($i <= $maxResults-1) {
             $pageToken = $value['nextPageToken'];
             $idVideo = $value['items'][$i]['snippet']['resourceId']['videoId'];
             $thumbnailVideo = $value['items'][$i]['snippet']['thumbnails']['default']['url'];
