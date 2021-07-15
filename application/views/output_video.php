@@ -25,7 +25,7 @@ function get_curl($url)
         $thumbnailVideo = $value['items'][0]['snippet']['thumbnails']['default']['url'];
         $judulVideo = $value['items'][0]['snippet']['title'];
         $tanggalUploadVideo = $value['items'][0]['snippet']['publishedAt'];
-        $durasiVideo = $value['items'][0]['contentDetails']['duration'];
+        $durasiVideo = new \DateInterval($value['items'][0]['contentDetails']['duration']);
         $jumlahViewVideo = $value['items'][0]['statistics']['viewCount'];
         $jumlahLikeVideo = $value['items'][0]['statistics']['likeCount'];
         $jumlahDislikeVideo = $value['items'][0]['statistics']['dislikeCount'];
@@ -36,7 +36,7 @@ function get_curl($url)
         echo 'Thumbnail Video: <img src='. $thumbnailVideo. ' alt=""><br>';
         echo 'Judul Video: '. $judulVideo. '<br>';
         echo 'Tanggal Upload Video:'. date('Y-m-d  h:i:sa', strtotime($tanggalUploadVideo)) . "<br>";
-        echo 'Durasi: '.$durasiVideo.'<br>';
+        echo 'Durasi:'. $durasiVideo->format('%H:%i:%s'). "<br>";
         echo 'Jumlah View: '.$jumlahViewVideo.'<br>';
         echo 'Jumlah Like: '.$jumlahLikeVideo.'<br>';
         echo 'Jumlah Dislike: '.$jumlahDislikeVideo.'<br>';

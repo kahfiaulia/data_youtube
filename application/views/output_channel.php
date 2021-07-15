@@ -41,13 +41,13 @@ $apikey = 'AIzaSyBbuY-ppNRH5i9oXuNSUbnDRD_2FiALdEA';
         $urlGetVideoDetail = 'https://www.googleapis.com/youtube/v3/videos?part=statistics,contentDetails&id=' . $idVideo . '&key=' . $apikey;
         $value = get_curl($urlGetVideoDetail);
 
-        $durasiVideo = $value['items'][0]['contentDetails']['duration'];
+        $durasiVideo = new \DateInterval($value['items'][0]['contentDetails']['duration']);
         $jumlahViewVideo = $value['items'][0]['statistics']['viewCount'];
         $jumlahLikeVideo = $value['items'][0]['statistics']['likeCount'];
         $jumlahDislikeVideo = $value['items'][0]['statistics']['dislikeCount'];
         $jumlahFavoritVideo = $value['items'][0]['statistics']['favoriteCount'];
         $jumlahCommentVideo = $value['items'][0]['statistics']['commentCount'];
-        echo 'Durasi: '.$durasiVideo.'<br>';
+        echo 'Durasi:'. $durasiVideo->format('%H:%i:%s'). "<br>";
         echo 'Jumlah View: '.$jumlahViewVideo.'<br>';
         echo 'Jumlah Like: '.$jumlahLikeVideo.'<br>';
         echo 'Jumlah Dislike: '.$jumlahDislikeVideo.'<br>';
