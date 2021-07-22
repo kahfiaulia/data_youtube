@@ -36,7 +36,7 @@
 <form action ="/data_youtube/main/data_video" method ="post" class="form-inline">
   <div class="container">
     <h4 class="text-center mt-3">Search By ID Video</h4>
-      <div class="search2">
+      <div class="search1">
         <div class="form-group mb-2">
           <input type="text" class="form-control text-center" id="id_video" name="id_video" placeholder="Insert ID Video">
         </div>
@@ -85,18 +85,12 @@ nav{
         width: 600px;
         padding: 10px;
         border: 1px solid #ccc;}
-.search2{
-        margin: 10px auto 0px auto;
-        width: auto;
-        padding: 10px;
-        border: 1px solid #ccc;}
-}
 hr.solid {
   margin: 0 100px 0 100px;
   border-top: 3px solid #bbb;
 }
 body {
-  background-image: url('bg.jpg');
+  background-image: url('/data_youtube-1/assets/bg.jpg');
   background-repeat: no-repeatbg;
   background-attachment: fixed;
   background-size: cover;
