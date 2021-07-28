@@ -111,26 +111,42 @@ $apikey = 'AIzaSyBbuY-ppNRH5i9oXuNSUbnDRD_2FiALdEA';
         </tbody>
     </table>
     <?php
-
         $i = 0;
         $idVideo = array();
-        while($i <= $maxResults-1) {
-            $pageToken = $value['nextPageToken'];
-            $idVideo = $value['items'][$i]['snippet']['resourceId']['videoId'];
-            $thumbnailVideo = $value['items'][$i]['snippet']['thumbnails']['default']['url'];
-            $judulVideo = $value['items'][$i]['snippet']['title'];
-            $tanggalUploadVideo = $value['items'][$i]['snippet']['publishedAt'];
-            echo '<br>';
-            echo $i+1;
-            echo '<a href="?get_video_detail='.$idVideo.'" id="idVideo">'.$idVideo."</a>";
-            echo $judulVideo."<br>";
-            echo '<img src='. $thumbnailVideo .' alt=""><br>';
-            echo date('Y-m-d  h:i:sa', strtotime($tanggalUploadVideo)) . "<br>";
-            get_video_detail($idVideo);
+        echo '<br>'; ?>
+        <table class="table table-bordered" style="width: 100%">
+            <thead>
+                <tr>
+                <th scope="col">No.</th>
+                <th scope="col">ID</th>
+                <th scope="col" style="width: 500px">Judul</th>
+                <th scope="col">Thumbnail</th>
+                <th scope="col">Tanggal Upload</th>
+                <th scope="col">Statistik</th>
+                </tr>
+            </thead>
+            <?php while($i <= $maxResults-1) { 
+                $pageToken = $value['nextPageToken'];
+                $idVideo = $value['items'][$i]['snippet']['resourceId']['videoId'];
+                $thumbnailVideo = $value['items'][$i]['snippet']['thumbnails']['default']['url'];
+                $judulVideo = $value['items'][$i]['snippet']['title'];
+                $tanggalUploadVideo = $value['items'][$i]['snippet']['publishedAt'];   
+            ?>
+            <tbody>
+                <tr>
+                    <th scope="row"><?php echo $i+1; ?></th>
+                    <td><?php echo $idVideo; ?></td>
+                    <td><?php echo $judulVideo; ?></td>
+                    <td><img src="<?php echo $thumbnailVideo; ?>" alt=""></td>
+                    <td><?php echo date('Y-m-d  h:i:sa', strtotime($tanggalUploadVideo)); ?></td>
+                    <td><?php get_video_detail($idVideo); ?></td>
+                </tr>
+            </tbody>
+            <?php 
             $i+=1;
-        }
-        
-    ?>
+            }
+            ?>
+        </table>
     <a href="">Next</a>
 </body>
 
