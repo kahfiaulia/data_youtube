@@ -90,7 +90,7 @@ hr.solid {
   border-top: 3px solid #bbb;
 }
 body {
-  background-image: url('/data_youtube-1/assets/bg.jpg');
+  background-image: url('/data_youtube/assets/bg.jpg');
   background-repeat: no-repeatbg;
   background-attachment: fixed;
   background-size: cover;
