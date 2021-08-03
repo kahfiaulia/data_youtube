@@ -59,6 +59,60 @@ function get_curl($url)
     <?php     
         get_video_detail($idVideo);
     ?>
+
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th scope="row">ID Video</th>
+                <td><?php echo $idVideo; ?></td>
+            </tr>
+            <tr>
+                <th scope="row">Thumbnails Video</th>
+                <td><img src="<?php echo $thumbnailVideo; ?>"></td>
+            </tr>
+            <tr>
+                <th scope="row">Judul Video</th>
+                <td><?php echo $judulVideo; ?></td>
+            </tr>
+            <tr>
+            <tr>
+                <th scope="row">Tanggal Upload Video</th>
+                <td><?php echo date('Y-m-d  h:i:sa', strtotime($tanggalUploadVideo)); ?></td>
+            </tr>
+            <tr>
+            <tr>
+                <th scope="row">Durasi</th>
+                <td><?php echo $durasiVideo->format('%H:%i:%s'); ?></td>
+            </tr>
+            <tr>
+            <tr>
+                <th scope="row">Jumlah View View</th>
+                <td><?php echo $jumlahViewVideo; ?></td>
+            </tr>
+            <tr>
+            <tr>
+                <th scope="row">Jumlah Like Video</th>
+                <td><?php echo $jumlahLikeVideo; ?></td>
+            </tr>
+            <tr>
+            <tr>
+                <th scope="row">Jumlah Dislike Video</th>
+                <td><?php echo $jumlahDislikeVideo; ?></td>
+            </tr>
+            <>
+            <tr>
+                <th scope="row">Jumlah Favorit Video</th>
+                <td><?php echo $jumlahFavoritVideo; ?></td>
+            </tr>
+            <>
+            <tr>
+                <th scope="row">Jumlah Komentar Video</th>
+                <td><?php echo $jumlahCommentVideo; ?></td>
+            </tr>
+            <tr>
+        </tbody>
+    </table>
+    
 </body>
 
 </html>
