@@ -83,9 +83,11 @@ $apikey = 'AIzaSyBbuY-ppNRH5i9oXuNSUbnDRD_2FiALdEA';
             <br>
         <p class="font-monospace">ID : <a style="text-decoration:none;" href="https://www.youtube.com/channel/<?php echo $id;?>"><?php echo $id;?></a></p>
     </div>
-    <div style="text-align: justify; margin:20px 20px 0 20px;">
+    <div class="container" style="text-align: justify;">
+    <b>Deskripsi Channel</b><br>
         <?php echo $deskripsi; ?>
     </div>
+    <div class="container mt-3">
     <table class="table table-bordered">
         <tbody>
             <tr>
@@ -111,18 +113,20 @@ $apikey = 'AIzaSyBbuY-ppNRH5i9oXuNSUbnDRD_2FiALdEA';
             <tr>
         </tbody>
     </table>
+    </div>
     <?php
         $i = 0;
         $idVideo = array();
         echo '<br>'; ?>
+        <div class="container">
         <table class="table table-sm table-hover" style="width: 100%">
             <thead class="text-center">
                 <tr>
                 <th scope="col">No.</th>
-                <th scope="col">ID</th>
-                <th scope="col" style="width: 500px">Judul</th>
+                <th scope="col">ID Video</th>
+                <th scope="col" style="width: 300px">Judul</th>
                 <th scope="col">Thumbnail</th>
-                <th scope="col">Tanggal Upload</th>
+                <th scope="col" style="width: 200px">Tanggal Upload</th>
                 <th scope="col">Statistik</th>
                 </tr>
             </thead>
@@ -148,7 +152,17 @@ $apikey = 'AIzaSyBbuY-ppNRH5i9oXuNSUbnDRD_2FiALdEA';
             }
             ?>
         </table>
+        </div>
     <a href="">Next</a>
 </body>
+
+<style type="text/css">
+body {
+  background-image: url('/data_youtube/assets/bg2.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+</style>
 
 </html>
