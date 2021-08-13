@@ -36,23 +36,35 @@ function get_curl($url)
 <html lang="en">
 
 <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Channel YouTube</title>
 </head>
+<!-- navbar -->
+<nav class="navbar navbar-dark bg-dark navbar fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a href="index.php" class="navbar-brand page-scroll">HOME</a>
+        </div>
+    </nav>
 
 <body>
-    <table class="table table-bordered">
+    <div class="text-center mt-5">
+        <div class="fw-bold">
+            <h3><?php echo $judulVideo; ?></h3>
+        </div>
+        <img src="<?php echo $thumbnailVideo; ?>" alt="" style="width:200px">
+            <br>
+        <p class="font-monospace">ID : <a style="text-decoration:none;" href="https://www.youtube.com/watch?v=<?php echo $idVideo; ?>"><?php echo $idVideo; ?></a></p>
+    </div>
+    <div class="container mt-3">
+    <div class="row">
+    <div class="column">
+    <table class="table table-bordered border-info">
         <tbody>
             <tr>
-                <th scope="row">ID Video</th>
-                <td><?php echo $idVideo; ?></td>
-            </tr>
-            <tr>
-                <th scope="row">Thumbnails Video</th>
-                <td><img src="<?php echo $thumbnailVideo; ?>"></td>
-            </tr>
             <tr>
                 <th scope="row">Judul Video</th>
                 <td><?php echo $judulVideo; ?></td>
@@ -69,31 +81,105 @@ function get_curl($url)
             </tr>
             <tr>
             <tr>
-                <th scope="row">Jumlah View View</th>
+                <th scope="row">Jumlah View Video</th>
                 <td><?php echo $jumlahViewVideo; ?></td>
             </tr>
             <tr>
-            <tr>
-                <th scope="row">Jumlah Like Video</th>
-                <td><?php echo $jumlahLikeVideo; ?></td>
-            </tr>
-            <tr>
-            <tr>
-                <th scope="row">Jumlah Dislike Video</th>
-                <td><?php echo $jumlahDislikeVideo; ?></td>
-            </tr>
-            <tr>
-                <th scope="row">Jumlah Favorit Video</th>
-                <td><?php echo $jumlahFavoritVideo; ?></td>
-            </tr>
-            <tr>
-                <th scope="row">Jumlah Komentar Video</th>
-                <td><?php echo $jumlahCommentVideo; ?></td>
-            </tr>
-            <tr>
-        </tbody>
+            </tbody>
     </table>
-    
+    </div>
+    <div class="column">
+        <table class="table table-bordered border-info">
+            <tbody>
+                <tr>
+                    <tr>
+                        <th scope="row">Jumlah Like Video</th>
+                        <td><?php echo $jumlahLikeVideo; ?></td>
+                    </tr>
+                <tr>
+                    <tr>
+                        <th scope="row">Jumlah Dislike Video</th>
+                        <td><?php echo $jumlahDislikeVideo; ?></td>
+                    </tr>
+                <tr>
+                    <tr>
+                        <th scope="row">Jumlah Favorit Video</th>
+                        <td><?php echo $jumlahFavoritVideo; ?></td>
+                    </tr>
+                <tr>
+                    <tr>
+                        <th scope="row">Jumlah Komentar Video</th>
+                        <td><?php echo $jumlahCommentVideo; ?></td>
+                    </tr>
+                <tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+    </div>
 </body>
+<!-- footer -->
+<footer>
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-sm-12">
+            <p>&copy; copyright 2021 | built by. <a href="#">ME</a>.</p>
+          </div>
+        </div>
+        <div class="row">
+        </div>
+      </div>
+    </footer>
+    <!-- akhir footer -->
+
+<style type="text/css">
+body {
+  background-image: url('/data_youtube/assets/bg2.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+img {
+  border-radius: 10%;
+}
+* {
+  box-sizing: border-box;
+}
+
+.row {
+  margin-left:-5px;
+  margin-right:-5px;
+}
+  
+.column {
+  float: left;
+  width: 50%;
+  padding: 5px;
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0px;
+  width: 100%;
+  height: 40px;
+  background-color: #333;
+  padding-top: 10px;
+  text-align: center;
+  }
+footer p {
+  color: #aaa;
+  font-size: 0.9em;
+}
+nav{
+  transition: transform 500ms ease-in-out;
+}
+</style>
 
 </html>
