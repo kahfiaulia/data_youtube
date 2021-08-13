@@ -60,68 +60,73 @@ $apikey = 'AIzaSyBbuY-ppNRH5i9oXuNSUbnDRD_2FiALdEA';
 <html lang="en">
 
 <head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Channel YouTube</title>
 </head>
+<!-- navbar -->
+<nav class="navbar navbar-dark bg-dark navbar fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a href="index.php" class="navbar-brand page-scroll">HOME</a>
+        </div>
 
+    </nav>
 <body>
+    <div class="text-center mt-5">
+        <div class="fw-bold">
+            <h1><?php echo $nama; ?></h1>
+        </div>
+            <img src="<?php echo $fotoProfil; ?>" alt="">
+            <br>
+        <p class="font-monospace">ID : <a style="text-decoration:none;" href="https://www.youtube.com/channel/<?php echo $id;?>"><?php echo $id;?></a></p>
+    </div>
+    <div class="container" style="text-align: justify;">
+    <b>Deskripsi Channel</b><br>
+        <?php echo $deskripsi; ?>
+    </div>
+    <div class="container mt-3">
     <table class="table table-bordered">
         <tbody>
             <tr>
-                <th scope="row">ID Channel</th>
-                <td><?php echo $id; ?></td>
-            </tr>
+                <tr>
+                    <th scope="row">Tanggal Pembuatan Channel</th>
+                    <td><?php echo date('Y-m-d  h:i:sa', strtotime($tanggalPembuatan)); ?></td>
+                </tr>
             <tr>
-                <th scope="row">Nama Channel</th>
-                <td><?php echo $nama; ?></td>
-            </tr>
+                <tr>
+                    <th scope="row">Jumlah View Channel</th>
+                    <td><?php echo $jumlahView; ?></td>
+                </tr>
             <tr>
+                <tr>
+                    <th scope="row">Jumlah Subscriber Channel</th>
+                    <td><?php echo $jumlahSubscriber; ?></td>
+                </tr>
             <tr>
-                <th scope="row">Foto Profil Channel</th>
-                <td><img src="<?php echo $fotoProfil; ?>" alt=""></td>
-            </tr>
-            <tr>
-            <tr>
-                <th scope="row">Deskripsi Channel</th>
-                <td><?php echo $deskripsi; ?></td>
-            </tr>
-            <tr>
-            <tr>
-                <th scope="row">Tanggal Pembuatan Channel</th>
-                <td><?php echo date('Y-m-d  h:i:sa', strtotime($tanggalPembuatan)); ?></td>
-            </tr>
-            <tr>
-            <tr>
-                <th scope="row">Jumlah View Channel</th>
-                <td><?php echo $jumlahView; ?></td>
-            </tr>
-            <tr>
-            <tr>
-                <th scope="row">Jumlah Subscriber Channel</th>
-                <td><?php echo $jumlahSubscriber; ?></td>
-            </tr>
-            <tr>
-            <tr>
-                <th scope="row">Jumlah Video</th>
-                <td><?php echo $jumlahVideo; ?></td>
-            </tr>
+                <tr>
+                    <th scope="row">Jumlah Video</th>
+                    <td><?php echo $jumlahVideo; ?></td>
+                </tr>
             <tr>
         </tbody>
     </table>
+    </div>
     <?php
         $i = 0;
         $idVideo = array();
         echo '<br>'; ?>
-        <table class="table table-bordered" style="width: 100%">
-            <thead>
+        <div class="container">
+        <table class="table table-sm table-hover" style="width: 100%">
+            <thead class="text-center">
                 <tr>
                 <th scope="col">No.</th>
-                <th scope="col">ID</th>
-                <th scope="col" style="width: 500px">Judul</th>
+                <th scope="col">ID Video</th>
+                <th scope="col" style="width: 300px">Judul</th>
                 <th scope="col">Thumbnail</th>
-                <th scope="col">Tanggal Upload</th>
+                <th scope="col" style="width: 200px">Tanggal Upload</th>
                 <th scope="col">Statistik</th>
                 </tr>
             </thead>
@@ -134,11 +139,11 @@ $apikey = 'AIzaSyBbuY-ppNRH5i9oXuNSUbnDRD_2FiALdEA';
             ?>
             <tbody>
                 <tr>
-                    <th scope="row"><?php echo $i+1; ?></th>
+                    <th class="text-center" scope="row"><?php echo $i+1; ?></th>
                     <td><?php echo $idVideo; ?></td>
                     <td><?php echo $judulVideo; ?></td>
-                    <td><img src="<?php echo $thumbnailVideo; ?>" alt=""></td>
-                    <td><?php echo date('Y-m-d  h:i:sa', strtotime($tanggalUploadVideo)); ?></td>
+                    <td class="text-center"><img src="<?php echo $thumbnailVideo; ?>" alt=""></td>
+                    <td class="text-center"><?php echo date('Y-m-d  h:i:sa', strtotime($tanggalUploadVideo)); ?></td>
                     <td><?php get_video_detail($idVideo); ?></td>
                 </tr>
             </tbody>
@@ -147,7 +152,17 @@ $apikey = 'AIzaSyBbuY-ppNRH5i9oXuNSUbnDRD_2FiALdEA';
             }
             ?>
         </table>
+        </div>
     <a href="">Next</a>
 </body>
+
+<style type="text/css">
+body {
+  background-image: url('/data_youtube/assets/bg2.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+</style>
 
 </html>

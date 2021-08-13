@@ -68,7 +68,7 @@
   left: 0;
   bottom: 0px;
   width: 100%;
-  height: 50px;
+  height: 40px;
   background-color: #333;
   padding-top: 10px;
   text-align: center;
@@ -86,8 +86,8 @@ nav{
         padding: 10px;
         border: 1px solid #ccc;}
 hr.solid {
-  margin: 0 100px 0 100px;
-  border-top: 3px solid #bbb;
+  margin: 0 100px 50px 100px;
+  border-top: 3px solid #000;
 }
 body {
   background-image: url('/data_youtube/assets/bg.jpg');
