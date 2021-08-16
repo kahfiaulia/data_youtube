@@ -163,6 +163,9 @@ body {
   background-attachment: fixed;
   background-size: cover;
 }
+img {
+  border-radius: 10%;
+}
 </style>
 
 </html>
