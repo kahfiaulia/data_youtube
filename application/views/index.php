@@ -22,7 +22,7 @@
     </div>
     <div class="form-group mb-2 text-center">
       <label for="max_results" class="form-label mb-0">&</label>
-      <input type="text" class="form-control text-center" id="max_results" name="max_results" placeholder="Max Number of Results (1-50)">
+      <input type="number" min="1" max="50" class="form-control text-center" id="max_results" name="max_results" placeholder="Max Number of Results (1-50)">
     </div>
     <div class="text-center">
   <button type="submit" class="btn btn-primary">Submit</button>
