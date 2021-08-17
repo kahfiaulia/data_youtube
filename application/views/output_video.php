@@ -134,7 +134,7 @@ function get_curl($url)
 
 <style type="text/css">
 body {
-  background-image: url('/data_youtube/assets/bg2.png');
+  background-image: url('/assets/bg2.png');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
