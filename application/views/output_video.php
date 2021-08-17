@@ -46,7 +46,7 @@ function get_curl($url)
 <nav class="navbar navbar-dark bg-dark navbar fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a href="index.php" class="navbar-brand page-scroll">HOME</a>
+          <a href="https://data-youtube.herokuapp.com/" class="navbar-brand page-scroll">HOME</a>
         </div>
     </nav>
 
