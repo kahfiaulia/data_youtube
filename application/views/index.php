@@ -13,7 +13,7 @@
     </nav>
     <!-- akhir navbar -->
     <body>
-<form action ="/data_youtube/main/data_channel" method ="post">
+<form action ="/main/data_channel" method ="post">
 <div class="container mb-5">
 <h4 class="text-center mt-5">Search By ID Channel</h4>
   <div class="search1">
@@ -33,7 +33,7 @@
 
 <hr class="solid">
 
-<form action ="/data_youtube/main/data_video" method ="post" class="form-inline">
+<form action ="/main/data_video" method ="post" class="form-inline">
   <div class="container">
     <h4 class="text-center mt-3">Search By ID Video</h4>
       <div class="search1">
